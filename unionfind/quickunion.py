@@ -14,8 +14,8 @@ class QuickUnion(UnionFind):
         self.arr[pid2] = pid1
 
     def parent(self, index):
-        currentitem = index
-        while self.arr[currentitem] != currentitem:
-            currentitem = self.arr[currentitem]
+        current_item = index
+        while self.arr[current_item] != current_item:
+            current_item = self.arr[current_item]
 
-        return currentitem
+        return current_item
