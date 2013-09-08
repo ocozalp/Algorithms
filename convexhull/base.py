@@ -8,3 +8,6 @@ class ConvexHullBase(object):
 
     def add_point(self, p):
         self.points.append(p)
+
+    def calculate(self):
+        raise Exception('Not implemented!')
