@@ -19,5 +19,6 @@ def graph_bfs(node, target, comparator=lambda x, y: x.value == y):
             if comparator(current_node, target):
                 return current_node
             queue.extend(current_node)
+            visited_nodes.append(current_node)
 
     return None
