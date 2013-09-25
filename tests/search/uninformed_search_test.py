@@ -4,9 +4,10 @@ from search.bfs import graph_bfs, tree_bfs
 from search.dfs import tree_dfs, graph_dfs
 
 
-class SearchTest(object):
+class UninformedSearchTest(object):
 
-    def prepare_tree1(self):
+    @staticmethod
+    def prepare_tree1():
         node = Node()
         node.value = '1'
 
@@ -25,13 +26,15 @@ class SearchTest(object):
 
         return node
 
-    def prepare_single_node_tree(self):
+    @staticmethod
+    def prepare_single_node_tree():
         node = Node()
         node.value = '1'
 
         return node
 
-    def prepare_graph1(self):
+    @staticmethod
+    def prepare_graph1():
         node = Node()
         node.value = '1'
 
@@ -58,59 +61,59 @@ class SearchTest(object):
         return node
 
     def test_tree1(self):
-        node = self.prepare_tree1()
+        node = UninformedSearchTest.prepare_tree1()
         result = self.tree_algorithm(node, '5')
         self.assertTrue(result.value == '5')
 
     def test_tree2(self):
-        node = self.prepare_tree1()
+        node = UninformedSearchTest.prepare_tree1()
         result = self.tree_algorithm(node, '7')
         self.assertTrue(result is None)
 
     def test_tree3(self):
-        node = self.prepare_single_node_tree()
+        node = UninformedSearchTest.prepare_single_node_tree()
         result = self.tree_algorithm(node, '1')
         self.assertTrue(result.value == '1')
 
     def test_tree4(self):
-        node = self.prepare_single_node_tree()
+        node = UninformedSearchTest.prepare_single_node_tree()
         result = self.tree_algorithm(node, '2')
         self.assertTrue(result is None)
 
     def test_tree_with_comparator1(self):
-        node = self.prepare_tree1()
+        node = UninformedSearchTest.prepare_tree1()
         result = self.tree_algorithm(node, 5, comparator=lambda x, y: int(x.value) == y)
         self.assertTrue(result.value == '5')
 
     def test_graph1(self):
-        node = self.prepare_graph1()
+        node = UninformedSearchTest.prepare_graph1()
         result = self.graph_algorithm(node, '1')
         self.assertTrue(result.value == '1')
 
     def test_graph2(self):
-        node = self.prepare_graph1()
+        node = UninformedSearchTest.prepare_graph1()
         result = self.graph_algorithm(node, '10')
         self.assertTrue(result is None)
 
     def test_graph3(self):
-        node = self.prepare_graph1()
+        node = UninformedSearchTest.prepare_graph1()
         result = self.graph_algorithm(node, '5')
         self.assertTrue(result.value == '5')
 
     def test_graph4(self):
-        node = self.prepare_graph1()
+        node = UninformedSearchTest.prepare_graph1()
         result = self.graph_algorithm(node, '6')
         self.assertTrue(result.value == '6')
 
 
-class BfsTest(SearchTest, TestCase):
+class BfsTest(UninformedSearchTest, TestCase):
 
     def setUp(self):
         self.tree_algorithm = tree_bfs
         self.graph_algorithm = graph_bfs
 
 
-class DfsTest(SearchTest, TestCase):
+class DfsTest(UninformedSearchTest, TestCase):
 
     def setUp(self):
         self.tree_algorithm = tree_dfs
