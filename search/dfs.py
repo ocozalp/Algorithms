@@ -14,7 +14,7 @@ def graph_dfs(node, target, comparator=lambda x, y: x.value == y):
     visited_nodes = []
 
     while len(queue) != 0:
-        current_node = queue.pop(0)
+        current_node = queue.pop()
         if current_node not in visited_nodes:
             if comparator(current_node, target):
                 return current_node
