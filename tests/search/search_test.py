@@ -1,6 +1,7 @@
 from unittest import TestCase
 from common.data_structures import Node
 from search.bfs import graph_bfs, tree_bfs
+from search.dfs import tree_dfs, graph_dfs
 
 
 class SearchTest(object):
@@ -102,8 +103,15 @@ class SearchTest(object):
         self.assertTrue(result.value == '6')
 
 
-class DfsTest(SearchTest, TestCase):
+class BfsTest(SearchTest, TestCase):
 
     def setUp(self):
         self.tree_algorithm = tree_bfs
         self.graph_algorithm = graph_bfs
+
+
+class DfsTest(SearchTest, TestCase):
+
+    def setUp(self):
+        self.tree_algorithm = tree_dfs
+        self.graph_algorithm = graph_dfs
