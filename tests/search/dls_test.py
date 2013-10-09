@@ -1,6 +1,6 @@
 from unittest.case import TestCase
 from common.data_structures import Node
-from search.depth_limited_search import graph_dls, tree_dls
+from search.uninformed_search import dls
 
 
 class DepthLimitedSearchTest(TestCase):
@@ -61,65 +61,65 @@ class DepthLimitedSearchTest(TestCase):
 
     def test_tree1(self):
         node = DepthLimitedSearchTest.prepare_tree1()
-        result = tree_dls(node, '5', 10)
+        result = dls(node, '5', 10)
         self.assertTrue(result.value == '5')
 
     def test_tree6(self):
         node = DepthLimitedSearchTest.prepare_tree1()
-        result = tree_dls(node, '5', 1)
+        result = dls(node, '5', 1)
         self.assertTrue(result is None)
 
     def test_tree2(self):
         node = DepthLimitedSearchTest.prepare_tree1()
-        result = tree_dls(node, '7', 10)
+        result = dls(node, '7', 10)
         self.assertTrue(result is None)
 
     def test_tree3(self):
         node = DepthLimitedSearchTest.prepare_single_node_tree()
-        result = tree_dls(node, '1', 0)
+        result = dls(node, '1', 0)
         self.assertTrue(result.value == '1')
 
     def test_tree4(self):
         node = DepthLimitedSearchTest.prepare_single_node_tree()
-        result = tree_dls(node, '2', 1)
+        result = dls(node, '2', 1)
         self.assertTrue(result is None)
 
     def test_tree5(self):
         node = DepthLimitedSearchTest.prepare_single_node_tree()
-        result = tree_dls(node, '2', 0)
+        result = dls(node, '2', 0)
         self.assertTrue(result is None)
 
     def test_tree_with_comparator1(self):
         node = DepthLimitedSearchTest.prepare_tree1()
-        result = tree_dls(node, 5, 5, comparator=lambda x, y: int(x.value) == y)
+        result = dls(node, 5, 5, comparator=lambda x, y: int(x) == y)
         self.assertTrue(result.value == '5')
 
     def test_graph1(self):
         node = DepthLimitedSearchTest.prepare_graph1()
-        result = graph_dls(node, '1', 2)
+        result = dls(node, '1', 2)
         self.assertTrue(result.value == '1')
 
     def test_graph2(self):
         node = DepthLimitedSearchTest.prepare_graph1()
-        result = graph_dls(node, '10', 10)
+        result = dls(node, '10', 10)
         self.assertTrue(result is None)
 
     def test_graph3(self):
         node = DepthLimitedSearchTest.prepare_graph1()
-        result = graph_dls(node, '5', 1)
+        result = dls(node, '5', 1)
         self.assertTrue(result is None)
 
     def test_graph5(self):
         node = DepthLimitedSearchTest.prepare_graph1()
-        result = graph_dls(node, '5', 10)
+        result = dls(node, '5', 10)
         self.assertTrue(result.value == '5')
 
     def test_graph4(self):
         node = DepthLimitedSearchTest.prepare_graph1()
-        result = graph_dls(node, '6', 4)
+        result = dls(node, '6', 4)
         self.assertTrue(result.value == '6')
 
     def test_graph6(self):
         node = DepthLimitedSearchTest.prepare_graph1()
-        result = graph_dls(node, '6', 2)
+        result = dls(node, '6', 2)
         self.assertTrue(result is None)
