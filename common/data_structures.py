@@ -14,3 +14,12 @@ class Node(object):
 
     def __eq__(self, other):
         return self.value == other.value
+
+
+class LinkedNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+    def set_next(self, next_node):
+        self.next = next_node
