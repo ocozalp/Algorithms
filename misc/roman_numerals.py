@@ -20,7 +20,7 @@ def roman_to_decimal(roman_number):
 
 def decimal_to_roman(decimal_number):
     result = ''
-    for value in reversed(sorted(digits_rev)):
+    for value in digits_rev:
         while decimal_number >= value:
             result += digits_rev[value]
             decimal_number -= value
