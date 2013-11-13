@@ -1,5 +1,5 @@
 from unittest.case import TestCase
-from tree.binary_tree import BinaryTree
+from data_structures.binary_tree import BinaryTree
 
 class BinaryTreeTest(TestCase):
     def prepare_tree1(self):
