@@ -17,7 +17,7 @@ class BinaryTree:
 
     def __insert(self, local_root, value):
         if local_root.value != value:
-            if local_root.value < value:
+            if local_root.value > value:
                 if local_root.left is None:
                     local_root.left = BinaryTree.BinaryTreeNode(value)
                 else:
@@ -38,34 +38,77 @@ class BinaryTree:
         if local_root.value == value:
             return True
 
-        if local_root.value < value:
+        if local_root.value > value:
             return self.__contains(local_root.left, value)
 
         return self.__contains(local_root.right, value)
 
     def pre_order(self):
-        return self.__pre_order(self.root)
+        result = list()
+        self.__pre_order(self.root, result)
+        return result
 
-    def __pre_order(self, local_root):
+    def __pre_order(self, local_root, result):
         if local_root is not None:
-            print local_root.value
-            self.__pre_order(local_root.left)
-            self.__pre_order(local_root.right)
+            result.append(local_root.value)
+            self.__pre_order(local_root.left, result)
+            self.__pre_order(local_root.right, result)
 
     def in_order(self):
-        return self.__in_order(self.root)
+        result = list()
+        self.__in_order(self.root, result)
+        return result
 
-    def __in_order(self, local_root):
+    def __in_order(self, local_root, result):
         if local_root is not None:
-            self.__in_order(local_root.left)
-            print local_root.value
-            self.__in_order(local_root.right)
+            self.__in_order(local_root.left, result)
+            result.append(local_root.value)
+            self.__in_order(local_root.right, result)
 
     def post_order(self):
-        return self.__post_order(self.root)
+        result = list()
+        self.__post_order(self.root, result)
+        return result
 
-    def __post_order(self, local_root):
+    def __post_order(self, local_root, result):
         if local_root is not None:
-            self.__post_order(local_root.left)
-            self.__post_order(local_root.right)
-            print local_root.value
+            self.__post_order(local_root.left, result)
+            self.__post_order(local_root.right, result)
+            result.append(local_root.value)
+
+    def delete(self, value):
+        self.__delete(None, self.root, value)
+
+    def __delete(self, parent_node, local_root, value):
+        if local_root is None:
+            return None
+
+        if local_root.value < value:
+            return self.__delete(local_root, local_root.right, value)
+        elif local_root.value > value:
+            return self.__delete(local_root, local_root.left, value)
+        else:
+            if local_root.right is not None and local_root.left is not None:
+                max_left_child = self.__find_max(local_root.left)
+                new_value = max_left_child.value
+                self.delete(new_value)
+                local_root.value = new_value
+            elif local_root.right is not None:
+                self.__set_child_of_parent(parent_node, local_root.right, value)
+            elif local_root.left is not None:
+                self.__set_child_of_parent(parent_node, local_root.left, value)
+            else:
+                self.__set_child_of_parent(parent_node, None, value)
+
+    def __find_max(self, local_root):
+        while local_root.right is not None:
+            local_root = local_root.right
+        return local_root
+
+    def __set_child_of_parent(self, parent, child, value):
+        if parent is None:
+            self.root = child
+        elif parent.value > value:
+            parent.left = child
+        else:
+            parent.right = child
