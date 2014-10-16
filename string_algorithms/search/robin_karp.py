@@ -31,7 +31,7 @@ def get_b_max(count):
     return result
 
 
-def robin_karp(text, pattern, start_index=0):
+def rabin_karp(text, pattern, start_index=0):
     pattern_h = calculate_h(pattern, 0, len(pattern) - 1)
     h = -1
     b_max = get_b_max(len(pattern) - 1)
